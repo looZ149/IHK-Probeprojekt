@@ -1,0 +1,30 @@
+# Build output
+bin/
+obj/
+
+# Rider / JetBrains
+.idea/
+
+# Visual Studio
+.vs/
+*.user
+
+# .NET
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Secrets / Config
+appsettings.local.json
+appsettings.json
+
+# OS
+.DS_Store
+Thumbs.db
