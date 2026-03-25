@@ -4,7 +4,7 @@ namespace HelpDeskBot;
 
 public static class GetConfig
 {
-    public static Configuration GetConfigJson()
+    public static (DiscordConfig discord, AspConfig asp) GetConfigJson()
     {
         IConfiguration config = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -14,9 +14,14 @@ public static class GetConfig
 
         //Each JSON OBJ is called a Section, we only have 1 in the config, anyway.
         var section = config.GetSection("Discord");
+        var section2 = config.GetSection("ASP");
 
-        Configuration botToken = new Configuration();
-        section.Bind(botToken);
-        return botToken;
+
+        DiscordConfig discordConfig = new DiscordConfig();
+        AspConfig aspConfig = new AspConfig();
+        
+        section.Bind(discordConfig);
+        section2.Bind(aspConfig);
+        return (discordConfig, aspConfig);
     }
 }

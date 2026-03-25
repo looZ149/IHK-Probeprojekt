@@ -1,6 +1,11 @@
 namespace HelpDeskBot;
 
-public class Configuration
+public class DiscordConfig
 {
-    public string Token { get; set; }
+    public string? Token { get; set; }
+}
+
+public class AspConfig
+{
+    public string? Key { get; set; }
 }
