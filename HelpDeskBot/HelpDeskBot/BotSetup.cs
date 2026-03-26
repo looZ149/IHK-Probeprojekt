@@ -1,15 +1,19 @@
 using DSharpPlus;
 using DSharpPlus.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HelpDeskBot;
 
 public static class BotSetup
 {
-    public static DiscordClient BuildClient(string token)
+    public static DiscordClient BuildClient(string token, string key, string url)
     {
         DiscordClientBuilder builder = DiscordClientBuilder.CreateDefault(token, DiscordIntents.AllUnprivileged | DiscordIntents.MessageContents);
         // We don't need serviceProvider, its part of dependency injection. Its part of the method signature tho so we have to keep it there.
         // extension is our CommandsExtension obj from DSharpPlus, this is what we actually interact with to register the command class
+
+        
+        builder.ConfigureServices(service => service.AddSingleton<HelpDeskApiService>(_ => new HelpDeskApiService(key, url, new HttpClient())));
         builder.UseCommands((serviceProvider, extension) =>
         {
             extension.AddCommands([typeof(FaqCommand)]);
@@ -17,7 +21,7 @@ public static class BotSetup
         {
             // Better register commands to our specific server for debugging purpose
             DebugGuildId = 1486010770356437083,
-            // THis is usually set default but who knows, right?
+            // This is usually set default but who knows, right?
             RegisterDefaultCommandProcessors = true
         });
         

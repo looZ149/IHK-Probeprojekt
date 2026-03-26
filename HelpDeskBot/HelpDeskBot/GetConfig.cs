@@ -6,8 +6,9 @@ public static class GetConfig
 {
     public static (DiscordConfig discord, AspConfig asp) GetConfigJson()
     {
+        var basePath = AppContext.BaseDirectory;
         IConfiguration config = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
+        .SetBasePath(basePath)
         .AddJsonFile("appsettings.json", optional: false,
         reloadOnChange: true)
         .Build();

@@ -28,3 +28,6 @@ appsettings.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Personal notes
+RECAP.md

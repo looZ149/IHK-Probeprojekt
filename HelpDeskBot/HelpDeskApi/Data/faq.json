@@ -1,2 +1,34 @@
-{
-}
+[
+  {
+    "question": "Where do I find the internal API keys?",
+    "answer": "Internal API keys are managed in the company's password manager (Bitwarden). Ask your team lead to add you to the relevant vaults on your first day."
+  },
+  {
+    "question": "How do I get access to the Git repositories?",
+    "answer": "Send your GitHub username to the IT department (it@lug-trug.de). You will be added to the organization within one business day."
+  },
+  {
+    "question": "What is our branching strategy?",
+    "answer": "We use Git Flow. Always branch off from 'develop', name your branch feature/<your-feature>, and open a pull request back into 'develop' when done."
+  },
+  {
+    "question": "Where is the internal documentation?",
+    "answer": "All internal docs are on Confluence. You can access it at confluence.lug-trug.de. Ask IT for your login credentials if you don't have them yet."
+  },
+  {
+    "question": "Who do I contact for IT issues?",
+    "answer": "Reach out to IT support via it@lug-trug.de or drop a message in the #it-support channel on Discord."
+  },
+  {
+    "question": "What coding standards do we follow?",
+    "answer": "We follow the Microsoft C# coding conventions. Code reviews are mandatory before merging. Make sure your code is properly commented and unit tested."
+  },
+  {
+    "question": "How do I set up my local development environment?",
+    "answer": "The setup guide is on Confluence under 'Onboarding > Dev Environment Setup'. It covers IDE setup, required SDKs, and how to connect to the dev database."
+  },
+  {
+    "question": "Where can I find the staging and production URLs?",
+    "answer": "Staging and production URLs are documented in Confluence under 'Infrastructure'. You need VPN access to reach the staging environment."
+  }
+]

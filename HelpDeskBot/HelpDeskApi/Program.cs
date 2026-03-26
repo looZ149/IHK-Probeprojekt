@@ -26,7 +26,7 @@ class ApiProgram
 
             // Read and return the file contents as plain text
             var content = File.ReadAllText(filePath);
-            return Results.Ok(content);
+            return Results.Content(content, "application/json");
         });
 
         app.Run();

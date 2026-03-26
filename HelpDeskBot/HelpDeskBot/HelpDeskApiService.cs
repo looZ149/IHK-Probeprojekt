@@ -11,7 +11,7 @@ public class HelpDeskApiService
     public HelpDeskApiService(string apiKey, string apiUrl, HttpClient httpClient)
     {
         this.apiKey = apiKey;
-        this.apiUrl = apiUrl;
+        this.apiUrl = apiUrl + "/faq";
         this.httpClient = httpClient;
     }
 
