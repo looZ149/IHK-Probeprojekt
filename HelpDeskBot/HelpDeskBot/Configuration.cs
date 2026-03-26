@@ -8,4 +8,5 @@ public class DiscordConfig
 public class AspConfig
 {
     public string? Key { get; set; }
+    public string? Url { get; set; }
 }
