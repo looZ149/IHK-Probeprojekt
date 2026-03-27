@@ -11,16 +11,27 @@ public class HelpDeskApiService
     public HelpDeskApiService(string apiKey, string apiUrl, HttpClient httpClient)
     {
         this.apiKey = apiKey;
-        this.apiUrl = apiUrl + "/faq";
+        this.apiUrl = apiUrl;
         this.httpClient = httpClient;
     }
 
     public async Task<string> GetFaq()
     {
-        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+        var url = this.apiUrl + "/faq";
+        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, url);
         getMessage.Headers.Add("X-Api-Key", apiKey);
         HttpResponseMessage getMessageBody = await httpClient.SendAsync(getMessage);
         getMessageBody.EnsureSuccessStatusCode(); //Do proper error handling later ?
+        return await getMessageBody.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> SearchFiles(string query)
+    {
+        var url = this.apiUrl += "/docs/search?q=" + query;
+        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, url);
+        getMessage.Headers.Add("X-Api-Key", apiKey);
+        HttpResponseMessage getMessageBody = await httpClient.SendAsync(getMessage);
+        getMessageBody.EnsureSuccessStatusCode();
         return await getMessageBody.Content.ReadAsStringAsync();
     }
 }

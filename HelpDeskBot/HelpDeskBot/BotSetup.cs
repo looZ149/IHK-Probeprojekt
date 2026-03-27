@@ -12,8 +12,10 @@ public static class BotSetup
         // We don't need serviceProvider, its part of dependency injection. Its part of the method signature tho so we have to keep it there.
         // extension is our CommandsExtension obj from DSharpPlus, this is what we actually interact with to register the command class
 
-        
+        //Build the DI container. Register the ApiService into the DI Container IServiceCollection from DSharpPlus
         builder.ConfigureServices(service => service.AddSingleton<HelpDeskApiService>(_ => new HelpDeskApiService(key, url, new HttpClient())));
+        
+        // DSharpPlus automatically injects registered services, so we only need to interact with extension to register command classes
         builder.UseCommands((serviceProvider, extension) =>
         {
             extension.AddCommands([typeof(FaqCommand)]);
