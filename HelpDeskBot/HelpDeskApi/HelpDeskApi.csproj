@@ -7,9 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="Data\**\*">
+        <Content Update="Data\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <None Include="Data\docs\**\*.md">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

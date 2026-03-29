@@ -1,5 +1,6 @@
 using DSharpPlus;
 using DSharpPlus.Commands;
+using DSharpPlus.Interactivity.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HelpDeskBot;
@@ -16,9 +17,11 @@ public static class BotSetup
         builder.ConfigureServices(service => service.AddSingleton<HelpDeskApiService>(_ => new HelpDeskApiService(key, url, new HttpClient())));
         
         // DSharpPlus automatically injects registered services, so we only need to interact with extension to register command classes
+
         builder.UseCommands((serviceProvider, extension) =>
         {
-            extension.AddCommands([typeof(FaqCommand)]);
+            extension.AddCommands([typeof(FaqCommand), typeof(SearchCommand)]);
+            
         }, new CommandsConfiguration()
         {
             // Better register commands to our specific server for debugging purpose
@@ -26,7 +29,7 @@ public static class BotSetup
             // This is usually set default but who knows, right?
             RegisterDefaultCommandProcessors = true
         });
-        
+        builder.UseInteractivity();
         DiscordClient client = builder.Build();
         return client;
     }

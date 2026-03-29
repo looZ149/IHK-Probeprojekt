@@ -64,17 +64,32 @@ class ApiProgram
             //Gotta build up a string and assign numbers so user can choose to which file we actually want to open?
 
             string output = "";
-            int i = 0;
             foreach (string fileName in fileNames)
             {
-                i++;
-                output += i + ". " + fileName + "\n"; //Uh.. ugly af? could maybe use StringBuilder ?
+                output += fileName + "\n"; //Uh.. ugly af? could maybe use StringBuilder ?
             }
             
             return Results.Content(output);
         });
-        
-        
+
+        app.MapGet("/docs/find", (HttpContext context) =>
+        {
+            if (!context.Request.Headers.TryGetValue("X-Api-Key", out var providedKey) || providedKey != apiKey)
+                return Results.Unauthorized();
+
+            var query = context.Request.Query["q"].ToString();
+            if (string.IsNullOrWhiteSpace(query))
+                return Results.BadRequest("Query parameter is missing");
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "Data", "docs", $"{query}.md");
+
+            if (!File.Exists(filePath))
+                return Results.NotFound("404 File not found");
+
+            var content = File.ReadAllText(filePath);
+            
+            return Results.Content(content);
+        });
 
         app.Run();
 

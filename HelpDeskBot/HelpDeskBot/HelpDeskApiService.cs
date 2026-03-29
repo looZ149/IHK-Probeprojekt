@@ -27,8 +27,18 @@ public class HelpDeskApiService
 
     public async Task<string> SearchFiles(string query)
     {
-        var url = this.apiUrl += "/docs/search?q=" + query;
-        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, url);
+        var searchUrl = this.apiUrl + "/docs/search?q=" + query;
+        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, searchUrl);
+        getMessage.Headers.Add("X-Api-Key", apiKey);
+        HttpResponseMessage getMessageBody = await httpClient.SendAsync(getMessage);
+        getMessageBody.EnsureSuccessStatusCode();
+        return await getMessageBody.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> GetDoc(string fileName)
+    {
+        var getDocUrl = this.apiUrl + $"/docs/find?q=" + fileName;
+        HttpRequestMessage getMessage = new HttpRequestMessage(HttpMethod.Get, getDocUrl);
         getMessage.Headers.Add("X-Api-Key", apiKey);
         HttpResponseMessage getMessageBody = await httpClient.SendAsync(getMessage);
         getMessageBody.EnsureSuccessStatusCode();
